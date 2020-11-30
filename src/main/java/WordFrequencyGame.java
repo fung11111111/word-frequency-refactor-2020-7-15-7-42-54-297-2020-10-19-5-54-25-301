@@ -5,13 +5,14 @@ public class WordFrequencyGame {
     private static final String WHITE_SPACE_REGEX = "\\s+";
     private static final int COUNT_ONE_WORD = 1;
     private static final String WORD_FREQUENCY_RESULT_PLUS_1 = " 1";
+    private static final String CALCULATE_ERROR = "Calculate Error";
 
     public String getResult(String sentence) {
         try {
-            Map<String, List<WordFrequency>> map = getListMap(getWordFrequencies(sentence));
+            Map<String, List<WordFrequency>> wordCountMapping = getListMap(getWordFrequencies(sentence));
 
             List<WordFrequency> list = new ArrayList<>();
-            for (Map.Entry<String, List<WordFrequency>> entry : map.entrySet()) {
+            for (Map.Entry<String, List<WordFrequency>> entry : wordCountMapping.entrySet()) {
                 WordFrequency input = new WordFrequency(entry.getKey(), entry.getValue().size());
                 list.add(input);
             }
@@ -19,7 +20,7 @@ public class WordFrequencyGame {
 
             return buildWordFrequencyResult(list);
         } catch (Exception exception) {
-            return "Calculate Error";
+            return CALCULATE_ERROR;
         }
     }
 
