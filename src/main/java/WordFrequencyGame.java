@@ -4,12 +4,13 @@ import java.util.stream.Collectors;
 public class WordFrequencyGame {
     private static final String WHITE_SPACE_REGEX = "\\s+";
     private static final String CALCULATE_ERROR = "Calculate Error";
-    public static final String LINE_FEED = "\n";
+    private static final String LINE_FEED = "\n";
 
     public String getResult(String sentence) {
         try {
-            List<WordFrequency> wordFrequencies = getWordFrequencies(sentence);
-            wordFrequencies.sort((firstWord, secondWord) -> secondWord.getCount() - firstWord.getCount());
+            List<WordFrequency> wordFrequencies = getWordFrequencies(sentence).stream()
+                    .sorted(Comparator.comparing(WordFrequency::getCount).reversed())
+                    .collect(Collectors.toList());
             return buildWordFrequencyResult(wordFrequencies);
         } catch (Exception exception) {
             return CALCULATE_ERROR;
@@ -34,5 +35,4 @@ public class WordFrequencyGame {
                 .map(word -> new WordFrequency(word, Collections.frequency(words, word)))
                 .collect(Collectors.toList());
     }
-
 }
