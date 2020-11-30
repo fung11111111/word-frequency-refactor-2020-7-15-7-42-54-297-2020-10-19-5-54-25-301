@@ -50,7 +50,6 @@ public class WordFrequencyGameTest {
         //Given
         String sentence = "the is is";
         String expectResult = "is 2\nthe 1";
-
     }
 
     @Test
@@ -68,7 +67,6 @@ public class WordFrequencyGameTest {
         //Then
         assertEquals("Calculation Error.", calculationErrorException.getLocalizedMessage());
     }
-
 
     private void validate_Input_words_process_to_expected_word(String inputStr, String expectResult) throws CalculationErrorException {
         WordFrequencyGame game = new WordFrequencyGame();
