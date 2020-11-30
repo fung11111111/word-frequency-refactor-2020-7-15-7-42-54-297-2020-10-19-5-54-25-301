@@ -3,16 +3,16 @@ import java.util.stream.Collectors;
 
 public class WordFrequencyGame {
     private static final String WHITE_SPACE_REGEX = "\\s+";
-    private static final String CALCULATE_ERROR = "Calculate Error";
     private static final String LINE_FEED = "\n";
 
-    public String getResult(String sentence) {
+    public String getResult(String sentence) throws CalculationErrorException{
         try {
             List<WordFrequency> sortedWordFrequencies = getCalculatedWordFrequencies(sentence);
             return buildWordFrequencyResult(sortedWordFrequencies);
-        } catch (Exception exception) {
-            return CALCULATE_ERROR;
+        } catch (Exception ignoringExc) {
+            System.out.println("Exception happens in getResult: " + ignoringExc.getLocalizedMessage());
         }
+        throw new CalculationErrorException();
     }
 
     public String buildWordFrequencyResult(List<WordFrequency> wordFrequencies) {
