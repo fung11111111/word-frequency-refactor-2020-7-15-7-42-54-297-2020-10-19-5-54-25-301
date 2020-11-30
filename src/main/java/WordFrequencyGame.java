@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class WordFrequencyGame {
     private static final String WHITE_SPACE_REGEX = "\\s+";
@@ -36,19 +37,9 @@ public class WordFrequencyGame {
 
     public List<WordFrequency> getWordFrequencies(String sentence) {
         String[] words = sentence.split(WHITE_SPACE_REGEX);
-
-        List<WordFrequency> inputList = new ArrayList<>();
-        for (String word : words) {
-            WordFrequency input = new WordFrequency(word, COUNT_ONE_WORD);
-            inputList.add(input);
-        }
-        return inputList;
-    }
-
-    public List<WordFrequency> getWordFrequencies_tmp(String sentence) {
-
-
-        return null;
+        return Arrays.asList(words).stream()
+                .map(word -> new WordFrequency(word, COUNT_ONE_WORD))
+                .collect(Collectors.toList());
     }
 
     private Map<String, List<WordFrequency>> getListMap(List<WordFrequency> inputList) {
