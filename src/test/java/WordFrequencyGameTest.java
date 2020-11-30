@@ -57,7 +57,7 @@ public class WordFrequencyGameTest {
     public void should_throw_calculationerror_exception_given_null_sentence() throws Exception, CalculationErrorException {
         //Given
         String sentence = null;
-        String expectResult = " ";
+
         WordFrequencyGame game = new WordFrequencyGame();
 
         //When
