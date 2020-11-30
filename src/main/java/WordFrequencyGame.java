@@ -8,9 +8,7 @@ public class WordFrequencyGame {
 
     public String getResult(String sentence) {
         try {
-            List<WordFrequency> sortedWordFrequencies = getCalculatedWordFrequencies(sentence).stream()
-                    .sorted(Comparator.comparing(WordFrequency::getCount).reversed())
-                    .collect(Collectors.toList());
+            List<WordFrequency> sortedWordFrequencies = getCalculatedWordFrequencies(sentence);
             return buildWordFrequencyResult(sortedWordFrequencies);
         } catch (Exception exception) {
             return CALCULATE_ERROR;
@@ -18,10 +16,9 @@ public class WordFrequencyGame {
     }
 
     public String buildWordFrequencyResult(List<WordFrequency> wordFrequencies) {
-        StringJoiner wordFrequencyResultJoiner = new StringJoiner(LINE_FEED);
-        wordFrequencies.stream()
-                .forEach(word -> wordFrequencyResultJoiner.add(buildJointWordsToLine(word)));
-        return wordFrequencyResultJoiner.toString();
+        return wordFrequencies.stream()
+                .map(word -> buildJointWordsToLine(word))
+                .collect(Collectors.joining(LINE_FEED));
     }
 
     public String buildJointWordsToLine(WordFrequency word) {
@@ -33,6 +30,7 @@ public class WordFrequencyGame {
         return words.stream()
                 .distinct()
                 .map(word -> new WordFrequency(word, Collections.frequency(words, word)))
+                .sorted(Comparator.comparing(WordFrequency::getCount).reversed())
                 .collect(Collectors.toList());
     }
 }
