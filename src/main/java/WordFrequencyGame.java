@@ -1,19 +1,23 @@
 import java.util.*;
 
 public class WordFrequencyGame {
+
+    private static final String WHITE_SPACE_REGEX = "\\s+";
+    private static final int COUNT_ONE_WORD = 1;
+    private static final String WORD_FREQUENCY_RESULT_PLUS_1 = " 1";
+
     public String getResult(String inputStr) {
 
-        if (inputStr.split("\\s+").length == 1) {
-            return inputStr + " 1";
+        if (inputStr.split(WHITE_SPACE_REGEX).length == COUNT_ONE_WORD) {
+            return inputStr + WORD_FREQUENCY_RESULT_PLUS_1;
         } else {
             try {
-
                 //split the input string with 1 to n pieces of spaces
-                String[] arr = inputStr.split("\\s+");
+                String[] arr = inputStr.split(WHITE_SPACE_REGEX);
 
                 List<Input> inputList = new ArrayList<>();
                 for (String s : arr) {
-                    Input input = new Input(s, 1);
+                    Input input = new Input(s, COUNT_ONE_WORD);
                     inputList.add(input);
                 }
 
