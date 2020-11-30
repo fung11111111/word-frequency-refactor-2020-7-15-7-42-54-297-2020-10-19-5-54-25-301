@@ -35,11 +35,25 @@ public class WordFrequencyGame {
     public String buildWordFrequencyResult(List<WordFrequency> inputList) {
         StringJoiner wordFrequencyResultJoiner = new StringJoiner("\n");
         for (WordFrequency w : inputList) {
+            String s = buildJointWordsToLine(w);
+            wordFrequencyResultJoiner.add(s);
+        }
+        return wordFrequencyResultJoiner.toString();
+    }
+
+    public String buildWordFrequencyResult_tmp(List<WordFrequency> inputList) {
+        StringJoiner wordFrequencyResultJoiner = new StringJoiner("\n");
+        for (WordFrequency w : inputList) {
             String s = w.getWord() + " " + w.getCount();
             wordFrequencyResultJoiner.add(s);
         }
         return wordFrequencyResultJoiner.toString();
     }
+
+    public String buildJointWordsToLine(WordFrequency word){
+        return String.format("%s %d", word.getWord(), word.getCount());
+    }
+
 
     public List<WordFrequency> getWordFrequencies(String sentence) {
         //split the input string with 1 to n pieces of spaces
