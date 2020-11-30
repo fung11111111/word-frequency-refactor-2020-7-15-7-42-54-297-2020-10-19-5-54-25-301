@@ -4,6 +4,7 @@ import java.util.stream.Collectors;
 public class WordFrequencyGame {
     private static final String WHITE_SPACE_REGEX = "\\s+";
     private static final String CALCULATE_ERROR = "Calculate Error";
+    public static final String LINE_FEED = "\n";
 
     public String getResult(String sentence) {
         try {
@@ -15,11 +16,10 @@ public class WordFrequencyGame {
         }
     }
 
-    public String buildWordFrequencyResult(List<WordFrequency> inputList) {
-        StringJoiner wordFrequencyResultJoiner = new StringJoiner("\n");
-        for (WordFrequency word : inputList) {
-            wordFrequencyResultJoiner.add(buildJointWordsToLine(word));
-        }
+    public String buildWordFrequencyResult(List<WordFrequency> wordFrequencies) {
+        StringJoiner wordFrequencyResultJoiner = new StringJoiner(LINE_FEED);
+        wordFrequencies.stream()
+                .forEach(word -> wordFrequencyResultJoiner.add(buildJointWordsToLine(word)));
         return wordFrequencyResultJoiner.toString();
     }
 
@@ -28,10 +28,10 @@ public class WordFrequencyGame {
     }
 
     public List<WordFrequency> getWordFrequencies(String sentence) {
-       List<String> words = Arrays.asList(sentence.split(WHITE_SPACE_REGEX));
+        List<String> words = Arrays.asList(sentence.split(WHITE_SPACE_REGEX));
         return words.stream()
                 .distinct()
-                .map(word -> new WordFrequency(word, Collections.frequency(words,word)))
+                .map(word -> new WordFrequency(word, Collections.frequency(words, word)))
                 .collect(Collectors.toList());
     }
 
