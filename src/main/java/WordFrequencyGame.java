@@ -1,5 +1,4 @@
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class WordFrequencyGame {
     private static final String WHITE_SPACE_REGEX = "\\s+";
@@ -7,53 +6,38 @@ public class WordFrequencyGame {
     private static final String WORD_FREQUENCY_RESULT_PLUS_1 = " 1";
 
     public String getResult(String sentence) {
-        if (sentence.split(WHITE_SPACE_REGEX).length == COUNT_ONE_WORD) {
-            return sentence + WORD_FREQUENCY_RESULT_PLUS_1;
-        } else {
-            try {
-                List<WordFrequency> inputList = getWordFrequencies(sentence);
+        try {
+            List<WordFrequency> inputList = getWordFrequencies(sentence);
 
-                //get the map for the next step of sizing the same word
-                Map<String, List<WordFrequency>> map = getListMap(inputList);
+            //get the map for the next step of sizing the same word
+            Map<String, List<WordFrequency>> map = getListMap(inputList);
 
-                List<WordFrequency> list = new ArrayList<>();
-                for (Map.Entry<String, List<WordFrequency>> entry : map.entrySet()) {
-                    WordFrequency input = new WordFrequency(entry.getKey(), entry.getValue().size());
-                    list.add(input);
-                }
-                inputList = list;
-
-                inputList.sort((firstWord, secondWord) -> secondWord.getCount() - firstWord.getCount());
-
-                return buildWordFrequencyResult(inputList);
-            } catch (Exception exception) {
-                return "Calculate Error";
+            List<WordFrequency> list = new ArrayList<>();
+            for (Map.Entry<String, List<WordFrequency>> entry : map.entrySet()) {
+                WordFrequency input = new WordFrequency(entry.getKey(), entry.getValue().size());
+                list.add(input);
             }
+            inputList = list;
+
+            inputList.sort((firstWord, secondWord) -> secondWord.getCount() - firstWord.getCount());
+
+            return buildWordFrequencyResult(inputList);
+        } catch (Exception exception) {
+            return "Calculate Error";
         }
     }
 
     public String buildWordFrequencyResult(List<WordFrequency> inputList) {
         StringJoiner wordFrequencyResultJoiner = new StringJoiner("\n");
-        for (WordFrequency w : inputList) {
-            String s = buildJointWordsToLine(w);
-            wordFrequencyResultJoiner.add(s);
+        for (WordFrequency word : inputList) {
+            wordFrequencyResultJoiner.add(buildJointWordsToLine(word));
         }
         return wordFrequencyResultJoiner.toString();
     }
 
-    public String buildWordFrequencyResult_tmp(List<WordFrequency> inputList) {
-        StringJoiner wordFrequencyResultJoiner = new StringJoiner("\n");
-        for (WordFrequency w : inputList) {
-            String s = w.getWord() + " " + w.getCount();
-            wordFrequencyResultJoiner.add(s);
-        }
-        return wordFrequencyResultJoiner.toString();
-    }
-
-    public String buildJointWordsToLine(WordFrequency word){
+    public String buildJointWordsToLine(WordFrequency word) {
         return String.format("%s %d", word.getWord(), word.getCount());
     }
-
 
     public List<WordFrequency> getWordFrequencies(String sentence) {
         //split the input string with 1 to n pieces of spaces
