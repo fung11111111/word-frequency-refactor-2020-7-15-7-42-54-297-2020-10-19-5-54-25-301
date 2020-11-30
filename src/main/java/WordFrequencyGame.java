@@ -7,21 +7,19 @@ public class WordFrequencyGame {
 
     public String getResult(String sentence) {
         try {
-            List<WordFrequency> inputList = getWordFrequencies(sentence);
-
             //get the map for the next step of sizing the same word
-            Map<String, List<WordFrequency>> map = getListMap(inputList);
+            Map<String, List<WordFrequency>> map = getListMap(getWordFrequencies(sentence));
 
             List<WordFrequency> list = new ArrayList<>();
             for (Map.Entry<String, List<WordFrequency>> entry : map.entrySet()) {
                 WordFrequency input = new WordFrequency(entry.getKey(), entry.getValue().size());
                 list.add(input);
             }
-            inputList = list;
 
-            inputList.sort((firstWord, secondWord) -> secondWord.getCount() - firstWord.getCount());
 
-            return buildWordFrequencyResult(inputList);
+            list.sort((firstWord, secondWord) -> secondWord.getCount() - firstWord.getCount());
+
+            return buildWordFrequencyResult(list);
         } catch (Exception exception) {
             return "Calculate Error";
         }
