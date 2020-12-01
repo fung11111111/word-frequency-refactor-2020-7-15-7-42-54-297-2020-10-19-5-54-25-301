@@ -10,7 +10,7 @@ public class WordFrequencyGameTest {
         //Given
         String sentence = "the";
         String expectResult = "the 1";
-        validate_Input_words_process_to_expected_word(sentence, expectResult);
+        validate_input_words_process_to_expected_word(sentence, expectResult);
     }
 
     @Test
@@ -18,7 +18,7 @@ public class WordFrequencyGameTest {
         //Given
         String sentence = "the is";
         String expectResult = "the 1\nis 1";
-        validate_Input_words_process_to_expected_word(sentence, expectResult);
+        validate_input_words_process_to_expected_word(sentence, expectResult);
     }
 
     @Test
@@ -26,7 +26,7 @@ public class WordFrequencyGameTest {
         //Given
         String sentence = "the      is";
         String expectResult = "the 1\nis 1";
-        validate_Input_words_process_to_expected_word(sentence, expectResult);
+        validate_input_words_process_to_expected_word(sentence, expectResult);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class WordFrequencyGameTest {
         //Given
         String sentence = "the   \n   is";
         String expectResult = "the 1\nis 1";
-        validate_Input_words_process_to_expected_word(sentence, expectResult);
+        validate_input_words_process_to_expected_word(sentence, expectResult);
     }
 
     @Test
@@ -42,7 +42,7 @@ public class WordFrequencyGameTest {
         //Given
         String sentence = "the the is";
         String expectResult = "the 2\nis 1";
-        validate_Input_words_process_to_expected_word(sentence, expectResult);
+        validate_input_words_process_to_expected_word(sentence, expectResult);
     }
 
     @Test
@@ -68,7 +68,7 @@ public class WordFrequencyGameTest {
         assertEquals("Calculation Error.", calculationErrorException.getLocalizedMessage());
     }
 
-    private void validate_Input_words_process_to_expected_word(String inputStr, String expectResult) throws CalculationErrorException {
+    private void validate_input_words_process_to_expected_word(String inputStr, String expectResult) throws CalculationErrorException {
         WordFrequencyGame game = new WordFrequencyGame();
         //When
         String result = game.getResult(inputStr);
