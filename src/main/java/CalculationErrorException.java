@@ -1,4 +1,4 @@
-public class CalculationErrorException extends Throwable{
+public class CalculationErrorException extends Exception{
     public CalculationErrorException(){
         super("Calculation Error.");
     }

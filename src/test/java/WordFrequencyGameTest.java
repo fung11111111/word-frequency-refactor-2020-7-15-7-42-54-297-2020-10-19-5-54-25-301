@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 public class WordFrequencyGameTest {
-
     @Test
     public void should_get_the_1_when_input_the() throws CalculationErrorException {
         //Given
