@@ -7,8 +7,8 @@ public class WordFrequencyGame {
 
     public String getResult(String sentence) throws CalculationErrorException {
         try {
-            List<WordFrequency> sortedWordFrequencies = getSortedCalculatedWordFrequencies(splitSentenceToWords(sentence));
-            return buildWordFrequencyResult(sortedWordFrequencies);
+            List<WordFrequency> wordFrequencies = getCalculatedWordFrequencies(splitSentenceToWords(sentence));
+            return buildWordFrequencyResult(sortWordFrequenciesWithDescending(wordFrequencies));
         } catch (Exception exception) {
             throw new CalculationErrorException();
         }
@@ -28,10 +28,15 @@ public class WordFrequencyGame {
         return Arrays.asList(sentence.split(WHITE_SPACE_REGEX));
     }
 
-    private List<WordFrequency> getSortedCalculatedWordFrequencies(List<String> words) {
+    private List<WordFrequency> getCalculatedWordFrequencies(List<String> words) {
         return words.stream()
                 .distinct()
                 .map(word -> new WordFrequency(word, Collections.frequency(words, word)))
+                .collect(Collectors.toList());
+    }
+
+    private List<WordFrequency> sortWordFrequenciesWithDescending(List<WordFrequency> wordFrequencies){
+        return wordFrequencies.stream()
                 .sorted(Comparator.comparing(WordFrequency::getCount).reversed())
                 .collect(Collectors.toList());
     }
