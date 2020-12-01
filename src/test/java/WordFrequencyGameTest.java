@@ -72,7 +72,7 @@ public class WordFrequencyGameTest {
         WordFrequencyGame game = new WordFrequencyGame();
         //When
         String result = game.getResult(inputStr);
-        //Then  result
+        //Then
         assertEquals(expectResult, result);
     }
 }
