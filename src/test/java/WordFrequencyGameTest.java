@@ -38,7 +38,7 @@ public class WordFrequencyGameTest {
     }
 
     @Test
-    public void should_pracess_two_same_words_with_sorted() throws Exception, CalculationErrorException {
+    public void should_process_two_same_words_with_sorted() throws Exception, CalculationErrorException {
         //Given
         String sentence = "the the is";
         String expectResult = "the 2\nis 1";
@@ -53,7 +53,7 @@ public class WordFrequencyGameTest {
     }
 
     @Test
-    public void should_throw_calculationerror_exception_given_null_sentence() throws Exception, CalculationErrorException {
+    public void should_throw_calculation_error_exception_given_null_sentence() {
         //Given
         String sentence = null;
 
@@ -72,7 +72,7 @@ public class WordFrequencyGameTest {
         WordFrequencyGame game = new WordFrequencyGame();
         //When
         String result = game.getResult(inputStr);
-        //Then
-        assertEquals(result, expectResult);
+        //Then  result
+        assertEquals(expectResult, result);
     }
 }

@@ -7,12 +7,11 @@ public class WordFrequencyGame {
 
     public String getResult(String sentence) throws CalculationErrorException{
         try {
-            List<WordFrequency> sortedWordFrequencies = getCalculatedWordFrequencies(sentence);
+            List<WordFrequency> sortedWordFrequencies = getSortedCalculatedWordFrequencies(sentence);
             return buildWordFrequencyResult(sortedWordFrequencies);
-        } catch (Exception ignoringExc) {
-            System.out.println("Exception happens in getResult: " + ignoringExc.getLocalizedMessage());
+        } catch (Exception exception) {
+            throw new CalculationErrorException();
         }
-        throw new CalculationErrorException();
     }
 
     public String buildWordFrequencyResult(List<WordFrequency> wordFrequencies) {
@@ -24,8 +23,8 @@ public class WordFrequencyGame {
     public String buildJointWordsToLine(WordFrequency word) {
         return String.format("%s %d", word.getWord(), word.getCount());
     }
-
-    public List<WordFrequency> getCalculatedWordFrequencies(String sentence) {
+// todo: separate the split step
+    public List<WordFrequency> getSortedCalculatedWordFrequencies(String sentence) {
         List<String> words = Arrays.asList(sentence.split(WHITE_SPACE_REGEX));
         return words.stream()
                 .distinct()
