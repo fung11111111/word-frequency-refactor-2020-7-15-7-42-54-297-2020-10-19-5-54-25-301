@@ -14,21 +14,21 @@ public class WordFrequencyGame {
         }
     }
 
-    public String buildWordFrequencyResult(List<WordFrequency> wordFrequencies) {
+    private String buildWordFrequencyResult(List<WordFrequency> wordFrequencies) {
         return wordFrequencies.stream()
                 .map(word -> buildJointWordsToLine(word))
                 .collect(Collectors.joining(LINE_FEED));
     }
 
-    public String buildJointWordsToLine(WordFrequency wordFrequency) {
+    private String buildJointWordsToLine(WordFrequency wordFrequency) {
         return String.format("%s %d", wordFrequency.getWord(), wordFrequency.getCount());
     }
 
-    public List<String> splitSentenceToWords(String sentence) {
+    private List<String> splitSentenceToWords(String sentence) {
         return Arrays.asList(sentence.split(WHITE_SPACE_REGEX));
     }
 
-    public List<WordFrequency> getSortedCalculatedWordFrequencies(List<String> words) {
+    private List<WordFrequency> getSortedCalculatedWordFrequencies(List<String> words) {
         return words.stream()
                 .distinct()
                 .map(word -> new WordFrequency(word, Collections.frequency(words, word)))
