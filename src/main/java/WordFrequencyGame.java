@@ -20,8 +20,8 @@ public class WordFrequencyGame {
                 .collect(Collectors.joining(LINE_FEED));
     }
 
-    public String buildJointWordsToLine(WordFrequency word) {
-        return String.format("%s %d", word.getWord(), word.getCount());
+    public String buildJointWordsToLine(WordFrequency wordFrequency) {
+        return String.format("%s %d", wordFrequency.getWord(), wordFrequency.getCount());
     }
 
     public List<String> splitSentenceToWords(String sentence) {
