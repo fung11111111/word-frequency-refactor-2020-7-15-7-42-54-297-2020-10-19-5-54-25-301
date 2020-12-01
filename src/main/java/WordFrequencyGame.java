@@ -5,9 +5,9 @@ public class WordFrequencyGame {
     private static final String WHITE_SPACE_REGEX = "\\s+";
     private static final String LINE_FEED = "\n";
 
-    public String getResult(String sentence) throws CalculationErrorException{
+    public String getResult(String sentence) throws CalculationErrorException {
         try {
-            List<WordFrequency> sortedWordFrequencies = getSortedCalculatedWordFrequencies(sentence);
+            List<WordFrequency> sortedWordFrequencies = getSortedCalculatedWordFrequencies(splitSentenceToWords(sentence));
             return buildWordFrequencyResult(sortedWordFrequencies);
         } catch (Exception exception) {
             throw new CalculationErrorException();
@@ -23,9 +23,12 @@ public class WordFrequencyGame {
     public String buildJointWordsToLine(WordFrequency word) {
         return String.format("%s %d", word.getWord(), word.getCount());
     }
-// todo: separate the split step
-    public List<WordFrequency> getSortedCalculatedWordFrequencies(String sentence) {
-        List<String> words = Arrays.asList(sentence.split(WHITE_SPACE_REGEX));
+
+    public List<String> splitSentenceToWords(String sentence) {
+        return Arrays.asList(sentence.split(WHITE_SPACE_REGEX));
+    }
+
+    public List<WordFrequency> getSortedCalculatedWordFrequencies(List<String> words) {
         return words.stream()
                 .distinct()
                 .map(word -> new WordFrequency(word, Collections.frequency(words, word)))
